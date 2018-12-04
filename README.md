@@ -12,7 +12,8 @@ Bootstrap
 jQUERY+AJAX
 ```
 
-## Deployment on Ubuntu (###Recommended system 18.04 on other versions may not work)
+## Deployment on Ubuntu
+###Recommended system 18.04 on other versions may not work
 ```
 git clone git@github.com:dreastyd/webapp.git
 cd webapp
