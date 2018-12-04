@@ -23,7 +23,7 @@ python3 webapp.py
 ## Deployment using docker
 ```
 #docker setup
-sudo snap install docker
+sudo snap install docker (sudo apt install docker.io)
 
 #pull docker image
 sudo docker pull dreasty/webapp:0.2
