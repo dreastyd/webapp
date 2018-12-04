@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="/static/profile_pics/default.jpg">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="user/1"> Slava Suhoy</a>
+            <small class="text-muted">02-12-2018 22:37</small>
+        </div>
+        <h2 class="article-title" id="50">About this site</h2>
+        <p class="article-content">
+            <b>Technology used:</b>
+        Python 3.6
+        Flask
+        SQLAlchemy
+        SQLite
+        HTML
+        CSS
+        Bootstrap
+        jQUERY+AJAX
+
+
+
+            <b>Deployment on Ubuntu (18.04)</b>
+            virtualenv -p python3 /.
+            source bin/activate
+            git clone git@github.com:dreastyd/webapp.git
+            cd webapp
+            pip install -r requirements.txt
+            python3 webapp.py
+
+
+            <b>Deployment using docker</b>
+            #docker setup
+            sudo snap install docker
+
+            #pull docker image
+            sudo docker pull dreasty/webapp
+
+            #run docker as daemon with port binding
+            sudo docker run -d -p 5000:5000 dreasty/webapp
+
+
+            <b>requirements.txt:</b>
+            bcrypt==3.1.4
+            cffi==1.11.5
+            Click==7.0
+            Flask==1.0.2
+            Flask-Bcrypt==0.7.1
+            Flask-Login==0.4.1
+            Flask-SQLAlchemy==2.3.2
+            Flask-WTF==0.14.2
+            itsdangerous==1.1.0
+            Jinja2==2.10
+            MarkupSafe==1.1.0
+            Pillow==5.3.0
+            pycparser==2.19
+            six==1.11.0
+            SQLAlchemy==1.2.14
+            Werkzeug==0.14.1
+            WTForms==2.2.1
+        </p>
+    </div>
+</article>
+{% endblock content %}

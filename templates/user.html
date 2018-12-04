@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<div class="content-section">
+    <div class="media">
+        <img class="rounded-circle account-img"
+             src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+        <div class="media-body">
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <div>
+                {% if user.is_active %}
+                <td class="c4"><span class="indicator online"></span> Online</td>
+                {% else %}
+                <p class="text-secondary"> Last activity: {{ user.time_online.strftime('%d.%m.%Y %H:%M') }}</p>
+                <td class="c4"><span class="indicator offline"></span> Offline</td>
+                {% endif %}
+
+            </div>
+
+            <div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </form>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group" disabled>
+            {{ form.csrf_token }}
+            <legend class="border-bottom mb-4">Account Info</legend>
+            <div class="form-group">
+                <label class="form-control-label" for="username">Username</label>
+                <input class="form-control form-control-lg" id="username" readonly name="username" required=""
+                       type="text" value="{{ user.username }}">
+                <div class="invalid-feedback">
+                    <span>{{ error }}</span>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="email">Email</label>
+                <input class="form-control form-control-lg" readonly id="email" name="email" required="" type="text"
+                       value="{{ user.email }}">
+                <div class="invalid-feedback">
+
+                    <span>{{ error }}</span>
+
+                </div>
+
+
+            </div>
+               <div class="form-group">
+                <label class="form-control-label" for="phone">Phone</label>
+                <input class="form-control form-control-lg" readonly id="phone" name="phone" required="" type="text"
+                       value="{{ user.phone }}">
+                <div class="invalid-feedback">
+
+                    <span>{{ error }}</span>
+
+                </div>
+                </div>
+                       <div class="form-group ">
+                    <label for="birthday">Birthday</label>
+                    <input class="form-control " id="birthday" name="birthday" type="date" value="{{ user.birthday }}">
+
+                </div>
+            <div class="form-group">
+                <label class="form-control-label" for="phone">About</label>
+                <input class="form-control form-control-lg" readonly id="about" name="phone" required="" type="text"
+                       value="{{ user.info }}">
+                <div class="invalid-feedback">
+
+                    <span>{{ error }}</span>
+
+                </div>
+                </div>
+            <div class="form-group">
+                <span class="text-danger">{{ error }}</span></br>
+
+            </div>
+        </fieldset>
+        <div class="form-group">
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}

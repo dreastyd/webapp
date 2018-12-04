@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+{% for post in posts %}
+
+<article class="media content-section">
+    <img class="rounded-circle article-img"
+         src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="user/{{ post.user_id }}">{{ post.author.username }}</a>
+            <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y %H:%M') }}</small>
+        </div>
+        <h2><a class="article-title" id="{{ post.id }}" href="{{ url_for('post', post_id=post.id) }}">{{ post.title
+            }}</a></h2>
+        <p class="article-content">{{ post.content }}</p>
+    </div>
+</article>
+
+{% endfor %}
+<script>
+    window.url = $(".article-title").first().attr('id');
+    url++
+    console.log(url)
+    console.log( "ready!" );
+    (function poll() {
+    $(function() {});
+
+    $.ajax({
+        url: "/post/"+ url,
+        type: "GET",
+        success: function(data) {
+            var myValue = $(data).find(".content-section")[0].outerHTML;
+            <!--var myValue = $(".content-section")[0].outerHTML;-->
+            url = $(data).find('.article-title').attr('id');
+            url++
+            console.log(url)
+            console.log(myValue);
+            $(".col-md-8").prepend(myValue);
+
+        },
+        dataType: "html",
+        complete: setTimeout(function() {poll()}, 10000),
+        timeout: 10000
+    })
+})();
+$(document).on( "click", "#but", function() {
+        alert( "bla bla" );
+});
+<!--$(document).ready(function(){-->
+    <!--initialise();-->
+<!--});-->
+<!--$(document).ajaxComplete(function () {-->
+    <!--initialise();-->
+<!--});-->
+
+</script>
+{% endblock content %}

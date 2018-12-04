@@ -1,5 +1,5 @@
-# webapp
-#Technology used:
+# simple test web app
+# Technology used:
 
 ```
 Python 3.6
@@ -12,7 +12,7 @@ Bootstrap
 jQUERY+AJAX
 ```
 
-##Deployment on Ubuntu (18.04)
+## Deployment on Ubuntu (18.04)
 ```
 git clone git@github.com:dreastyd/webapp.git
 cd webapp
@@ -20,7 +20,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 python3 webapp.py
 ```
-##Deployment using docker
+## Deployment using docker
 ```
 #docker setup
 sudo snap install docker
@@ -32,7 +32,7 @@ sudo docker pull dreasty/webapp:0.2
 sudo docker run -d -p 5000:5000 dreasty/webapp:0.2
 ```
 
-##requirements.txt:
+## requirements.txt:
 ```
 bcrypt==3.1.4
 cffi==1.11.5

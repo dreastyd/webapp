@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Avatar</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Status</th>
+        <th scope="col">Last seen</th>
+    </tr>
+    </thead>
+    {% for user in users %}
+    <tr>
+        <td class="c1"><a href="user/{{ user.id}}"><img class="rounded-circle usr-img" src={{url_for('static', filename='profile_pics/' +
+                            user.image_file)}}></a></td>
+        <td class="c2"><a id="userlink" href="user/{{ user.id}}">{{user.username}}</a></td>
+        <td class="c3">{{user.email}}</td>
+        {% if user.is_active %}
+        <td class="c4"><span class="indicator online"></span> Online</td>
+        {% else %}
+        <td class="c4"><span class="indicator offline"></span> Offline</td>
+        {% endif %}
+        <td class="c3">{{user.time_online.strftime('%d.%m.%Y %H:%M')}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

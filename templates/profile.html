@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ image_file }}">
+        <div class="media-body">
+
+            <div id="editinfo" align="right" style="float:right">
+
+            <a class="text-secondary" href="#">Edit info</a>
+            </div><script>
+                            $('#editinfo').click(function(){ editinfo(); return false; });
+                            function editinfo() {
+                            var form = document.querySelector(".form-group");
+                            var pic = document.querySelector("#pic");
+                            var btn = document.querySelector("#button");
+                            form.removeAttribute("disabled");
+                            pic.removeAttribute("hidden");
+                            btn.removeAttribute("hidden");
+                            }
+                            </script>
+          <h2 class="account-heading">{{ current_user.username }}</h2>
+          <p class="text-secondary">{{ current_user.email }}</p>
+                       <div>
+
+                <!--<span class="indicator online"></span> Online-->
+              <!--<input id="toggle-event" type="checkbox" checked data-toggle="toggle" data-on="Online" data-off="Offline" data-onstyle="success" data-offstyle="danger">-->
+            </div>
+
+ <div>
+
+                <!--<span class="indicator online"></span> Online-->
+
+                <!--{{ "%s" % "checked" if current_user.is_active }}-->
+
+              <input id="toggle-active" type="checkbox"  {{ "%s" % "checked" if current_user.is_active }}  data-toggle="toggle" data-on="Online" data-off="Offline" data-onstyle="success" data-offstyle="danger">
+
+            </div>
+
+        </div>
+            <script>
+            <!--var state_select = document.getElementById("toggle-active");-->
+            var checkedValue = document.querySelector('#toggle-active');
+            checkedValue.onchange = function()  {
+
+            state = checkedValue;
+            console.log(state.checked)
+            if (state.checked) {
+                fetch('/status?status=1').then(function(response) {
+                console.log(response.json()) });
+               }
+            else {
+                fetch('/status?status=0').then(function(response) {
+                console.log(response.json()) });
+                }}
+            </script>
+      </div>
+    </form>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group" disabled>
+                {{ form.csrf_token }}
+                <legend class="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.phone.label(class="form-control-label") }}
+                    {% if form.phone.errors %}
+                        {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.phone.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.phone(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                                <div  class="form-group ">
+                    {{ form.birthday.label() }}
+                    {{ form.birthday(class="form-control ") }}
+                    {% if form.birthday.errors %}
+                        {% for error in form.birthday.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="media-body">
+                    {{ form.info.label(class="form-control-label") }}
+                    {% if form.info.errors %}
+                        {{ form.info(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.info.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.info(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div hidden id="pic" class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div><br>
+                            <div hidden id="button" class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            </fieldset>
+
+        </form>
+    </div>
+
+
+
+{% endblock content %}

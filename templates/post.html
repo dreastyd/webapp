@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img"
+         src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+
+            {% set link = post.user_id %}
+
+            <a class="mr-2" href="{{ url_for('user', user_id=post.user_id) }}"> {{ post.author.username }}</a>
+            <small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y %H:%M') }}</small>
+        </div>
+        <h2 class="article-title" id="{{ post.id }}">{{ post.title }}</h2>
+        <p class="article-content">{{ post.content }}</p>
+    </div>
+</article>
+{% endblock content %}
