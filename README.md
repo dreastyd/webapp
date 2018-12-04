@@ -20,7 +20,10 @@ cd webapp
 source venv/bin/activate
 pip install -r requirements.txt
 python3 webapp.py
+
+app will be accessable on the port 5000 http://localhost:5000
 ```
+
 ## Deployment using docker
 ```
 #docker setup
